@@ -2,25 +2,20 @@
 
 import { Button } from "@/components/ui/button"
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ExternalLink, Plus, X } from "lucide-react"
+import { ExternalLink, Loader2, Plus, X } from "lucide-react"
 import { useState } from "react"
 
-interface AddProfileDialogProps {
-  onAddProfiles: (urls: string[]) => void
-  trigger?: React.ReactNode
-}
-
-export function AddProfileDialog({ onAddProfiles, trigger }: AddProfileDialogProps) {
+export function AddProfileDialog() {
   const [isOpen, setIsOpen] = useState(false)
   const [urls, setUrls] = useState<string[]>([''])
   const [isLoading, setIsLoading] = useState(false)
@@ -57,8 +52,10 @@ export function AddProfileDialog({ onAddProfiles, trigger }: AddProfileDialogPro
 
     setIsLoading(true)
     try {
-      await onAddProfiles(validUrls)
-      setUrls([''])
+      const response = await fetch("/api/update-urls", {
+        method: "POST",
+        body: JSON.stringify({ urls }),
+      })
       setIsOpen(false)
     } catch (error) {
       console.error('Error adding profiles:', error)
@@ -75,19 +72,27 @@ export function AddProfileDialog({ onAddProfiles, trigger }: AddProfileDialogPro
   }
 
   const validUrlCount = urls.filter(url => url.trim() && isValidLinkedInUrl(url.trim())).length
-  const hasInvalidUrls = urls.some(url => url.trim() && !isValidLinkedInUrl(url.trim()))
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        {trigger || (
           <Button size="sm">
             <Plus className="h-4 w-4 mr-2" />
             Add Profile
           </Button>
-        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
+        {isLoading && (
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-50 rounded-lg">
+            <div className="flex flex-col items-center space-y-3">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+              <div className="text-center">
+                <p className="text-sm font-medium text-gray-900">Adding profiles...</p>
+                <p className="text-xs text-gray-500 mt-1">This may take a few moments</p>
+              </div>
+            </div>
+          </div>
+        )}
         <DialogHeader>
           <DialogTitle>Add LinkedIn Profiles</DialogTitle>
           <DialogDescription>

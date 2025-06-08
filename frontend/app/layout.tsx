@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ASBHive viewer",
+  title: "ASBHive 2.0",
   description: "git push push push sahur",
 };
 

@@ -7,26 +7,6 @@ import { useRouter } from "next/navigation"
 import { AddProfileDialog } from "./add-profile-dialog"
 
 export function DashboardHeader({ profiles }: { profiles: LinkedInProfile[] }) {
-  const router = useRouter()
-
-  const handleAddProfiles = async (urls: string[]) => {
-    // Process each URL - you can navigate to the profile page or handle bulk processing
-    for (const url of urls) {
-      // Option 1: Navigate to each profile page (opens in new tab/window)
-      window.open(`/profiles?url=${encodeURIComponent(url)}`, '_blank')
-    }
-    
-    // Option 2: If you want to handle bulk processing, you could:
-    // - Make API calls to fetch all profiles at once
-    // - Update the profiles state in the parent component
-    // - Show a loading state while processing
-    
-    // For now, we'll just refresh to show any newly added profiles
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
-  }
-
   return (
     <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center justify-between px-6">
@@ -52,7 +32,7 @@ export function DashboardHeader({ profiles }: { profiles: LinkedInProfile[] }) {
                 Export as CSV
             </Button>
 
-          <AddProfileDialog onAddProfiles={handleAddProfiles} />
+          <AddProfileDialog />
         </div>
       </div>
     </header>
