@@ -96,8 +96,6 @@ def process_single_profile(urls: list[str]):
                 # Try to parse the JSON response from Gemini with better error handling
                 try:
                     gemini_response = response["gemini_response"]
-                    print("GEMINI RESPONSE: ", gemini_response)
-                    print(f"Raw Gemini response for {url}: {gemini_response}")
                     
                     # Additional cleaning in case the LLM function didn't catch everything
                     if gemini_response.startswith('```') and gemini_response.endswith('```'):
@@ -107,7 +105,6 @@ def process_single_profile(urls: list[str]):
                     
                     parsed_data = json.loads(gemini_response)
                     parsed_data["linkedinUrl"] = url
-                    print("PARSED DATA: ", parsed_data)
                     # Validate that we got a valid structure (object or list)
                     if not isinstance(parsed_data, (dict, list)):
                         raise ValueError("Response is not a valid JSON object or array")
@@ -146,19 +143,16 @@ def process_single_profile(urls: list[str]):
                     except Exception as file_error:
                         print(f"Warning: Failed to update tempfile.txt: {file_error}")
                 
-                return ProfileResponse(
-                    url=url,
-                    success=True,
-                    data=parsed_data
-                )
+                print(f"Successfully processed and saved profile for {url}")
             
             except Exception as e:
                 print(f"Error processing {url}: {e}")
-                return ProfileResponse(
-                    url=url,
-                    success=False,
-                    error=str(e)
-                )
+        
+        # Return success response after processing all URLs
+        return {
+            "message": f"Successfully processed {len(urls)} URLs",
+            "processed_count": len(urls)
+        }
         
     except HTTPException:
         raise
@@ -260,14 +254,24 @@ async def read_cached_profile():
     try:
         # Read the JSON file using context manager for better file handling
         with open("tempfile.txt", 'r') as f:
-            profile_data = json.load(f)
+            content = f.read().strip()
+            
+            # Check if file is empty
+            if not content:
+                raise HTTPException(status_code=404, detail="No cached profile data found. File is empty.")
+            
+            # Parse the JSON content
+            profile_data = json.loads(content)
         
         return profile_data
     
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="No cached profile data found. Please process profiles first.")
     except json.JSONDecodeError:
-        raise HTTPException(status_code=500, detail="Error parsing cached profile data")
+        raise HTTPException(status_code=400, detail="Invalid JSON format in cached profile data")
+    except HTTPException:
+        # Re-raise HTTPExceptions (like the empty file check above)
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading profile: {str(e)}")
 
