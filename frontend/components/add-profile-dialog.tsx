@@ -53,7 +53,7 @@ export function AddProfileDialog() {
     setIsLoading(true)
     try {
       console.log("VALID URLS:", validUrls)
-      const response = await fetch("http://0.0.0.0:8000/update-urls", {
+      const response = await fetch("http://20.121.65.87:8000/update-urls", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
