@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import os
-from llm import process_linkedin_url
+from llm import process_linkedin_url, query_alumni_data
 import json
 from dotenv import load_dotenv
 from scheduler import scrape_a_few_profiles
@@ -43,6 +43,15 @@ class ProcessResponse(BaseModel):
     total_processed: int
     successful: int
     failed: int
+
+class ChatRequest(BaseModel):
+    query: str
+
+class ChatResponse(BaseModel):
+    query: str
+    answer: str
+    success: bool
+    error: str = None
 
 @app.post("/update-urls", response_model=URLResponse)
 async def update_urls(request: URLRequest):
@@ -270,6 +279,51 @@ async def read_cached_profile():
         raise HTTPException(status_code=500, detail="Error parsing cached profile data")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading profile: {str(e)}")
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat_with_alumni_data(request: ChatRequest):
+    """Chat endpoint that answers questions about alumni data."""
+    try:
+        # Get Gemini API key from environment
+        gemini_api_key = os.getenv("GEMINI_API_KEY")
+        if not gemini_api_key:
+            raise HTTPException(status_code=500, detail="GEMINI_API_KEY environment variable not set")
+        
+        # Read alumni data from tempfile.txt
+        try:
+            with open("tempfile.txt", 'r') as f:
+                alumni_data = json.load(f)
+        except FileNotFoundError:
+            raise HTTPException(status_code=404, detail="No alumni data found. Please process profiles first using /process-profiles")
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=500, detail="Error parsing alumni data")
+        
+        if not alumni_data:
+            raise HTTPException(status_code=404, detail="No alumni data available. Please process profiles first.")
+        
+        # Query the alumni data using Gemini
+        try:
+            response = query_alumni_data(request.query, alumni_data, gemini_api_key)
+            
+            return ChatResponse(
+                query=response["query"],
+                answer=response["answer"],
+                success=True
+            )
+        
+        except Exception as e:
+            print(f"Error querying alumni data: {e}")
+            return ChatResponse(
+                query=request.query,
+                answer="",
+                success=False,
+                error=f"Error processing query: {str(e)}"
+            )
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing chat request: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

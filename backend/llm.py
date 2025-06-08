@@ -182,3 +182,44 @@ Data:
     return {
         "gemini_response": cleaned_response
     }
+
+def query_alumni_data(query: str, alumni_data: list, gemini_api_key: str) -> dict:
+    """
+    Query alumni data using Gemini API based on user question.
+    
+    Args:
+        query: User's question about the alumni
+        alumni_data: List of alumni profile data from tempfile.txt
+        gemini_api_key: Gemini API key
+    
+    Returns:
+        dict: Response from Gemini API with answer
+    """
+    
+    # Convert alumni data to a formatted string for context
+    context = json.dumps(alumni_data, indent=2)
+    
+    prompt = f"""
+You are a helpful assistant that can answer questions about alumni profiles. You have access to a database of LinkedIn profiles with detailed information about various alumni.
+
+Based on the alumni data provided below, please answer the user's question accurately and comprehensively. If the information to answer the question is not available in the data, please say so clearly.
+
+User Question: {query}
+
+Alumni Data:
+{context}
+
+Please provide a helpful, accurate, and well-structured response. If you're listing multiple alumni or comparing them, organize your response clearly. Include specific details from their profiles when relevant (names, companies, roles, education, skills, etc.).
+"""
+    
+    # Configure Gemini API
+    client = genai.Client(api_key=gemini_api_key)
+    response = client.models.generate_content(
+        model='gemini-2.0-flash-001', 
+        contents=prompt
+    )
+    
+    return {
+        "query": query,
+        "answer": response.text
+    }
