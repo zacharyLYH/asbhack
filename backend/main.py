@@ -98,12 +98,32 @@ async def process_all_profiles():
                 # Process each URL using the LLM function
                 response = process_linkedin_url(url, gemini_api_key)
                 
-                # Try to parse the JSON response from Gemini
+                # Try to parse the JSON response from Gemini with better error handling
                 try:
-                    parsed_data = json.loads(response["gemini_response"])
-                except json.JSONDecodeError:
-                    # If JSON parsing fails, return raw response
-                    parsed_data = {"raw_response": response["gemini_response"]}
+                    gemini_response = response["gemini_response"]
+                    print(f"Raw Gemini response for {url}: {gemini_response}")
+                    
+                    # Additional cleaning in case the LLM function didn't catch everything
+                    if gemini_response.startswith('```') and gemini_response.endswith('```'):
+                        gemini_response = gemini_response.strip('```').strip()
+                        if gemini_response.startswith('json'):
+                            gemini_response = gemini_response[4:].strip()
+                    
+                    parsed_data = json.loads(gemini_response)
+                    
+                    # Validate that we got a valid structure (object or list)
+                    if not isinstance(parsed_data, (dict, list)):
+                        raise ValueError("Response is not a valid JSON object or array")
+                        
+                except (json.JSONDecodeError, ValueError) as e:
+                    print(f"JSON parsing failed for {url}: {e}")
+                    print(f"Raw response: {response['gemini_response']}")
+                    # If JSON parsing fails, return structured error info
+                    parsed_data = {
+                        "error": "Failed to parse JSON response",
+                        "raw_response": response["gemini_response"],
+                        "parse_error": str(e)
+                    }
                 
                 results.append(ProfileResponse(
                     url=url,
@@ -113,6 +133,7 @@ async def process_all_profiles():
                 successful += 1
                 
             except Exception as e:
+                print(f"Error processing {url}: {e}")
                 results.append(ProfileResponse(
                     url=url,
                     success=False,

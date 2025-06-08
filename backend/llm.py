@@ -1,5 +1,6 @@
 import os
 import re
+import json
 from pathlib import Path
 from google import genai
 from google.genai import types
@@ -29,6 +30,28 @@ def get_data_from_file(name: str) -> Optional[str]:
     
     return None
 
+def clean_gemini_response(response_text: str) -> str:
+    """
+    Clean Gemini response by removing markdown code blocks and extra formatting.
+    """
+    # Remove markdown code blocks
+    response_text = re.sub(r'```json\s*', '', response_text)
+    response_text = re.sub(r'```\s*$', '', response_text)
+    response_text = response_text.strip()
+    
+    # Try to find JSON object or array in the response
+    # First try to match a JSON object
+    json_object_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+    if json_object_match:
+        return json_object_match.group(0)
+    
+    # Then try to match a JSON array
+    json_array_match = re.search(r'\[.*\]', response_text, re.DOTALL)
+    if json_array_match:
+        return json_array_match.group(0)
+    
+    return response_text
+
 def process_linkedin_url(url: str, gemini_api_key: str) -> dict:
     """
     Process LinkedIn URL, get corresponding data, and call Gemini API.
@@ -51,31 +74,80 @@ def process_linkedin_url(url: str, gemini_api_key: str) -> dict:
         raise ValueError(f"No data found for {name}")
     
     prompt = f"""
-Extract all relevant information from this LinkedIn profile and return it as a clean JSON array of strings. Each string should contain a specific piece of information from the profile.
+Extract all relevant information from this LinkedIn profile and return it as a well-structured JSON object with categorized information.
 
-Extract the following types of information:
-- Name
-- Headline/Bio
-- Location
-- Profile Image URL
-- Experience (title, company, duration, description, location)
-- Education (institution, degree, field, duration, description)
-- Skills
-- Projects (title, description, duration, technologies, url)
-- Awards (title, issuer, date, description)
-- Publications (title, publisher, date, description, url)
-- Patents (title, patent number, date, description)
-- Certifications (name, issuer, date, expiry date, credential ID, url)
-- Languages (name, proficiency level)
-- Volunteer Experience (role, organization, duration, description)
+Return a JSON object with the following structure:
+{{
+  "name": "Full Name",
+  "headline": "Professional headline/bio",
+  "location": "City, State, Country",
+  "experiences": [
+    {{
+      "title": "Job Title",
+      "company": "Company Name",
+      "duration": "Start - End dates",
+      "location": "Location",
+      "description": "Job description if available"
+    }}
+  ],
+  "education": [
+    {{
+      "institution": "School/University Name",
+      "degree": "Degree type",
+      "field": "Field of study",
+      "duration": "Start - End dates",
+      "description": "Additional details if available"
+    }}
+  ],
+  "skills": ["Skill 1", "Skill 2", "Skill 3"],
+  "projects": [
+    {{
+      "title": "Project Name",
+      "description": "Project description",
+      "duration": "Duration if available",
+      "technologies": ["Tech 1", "Tech 2"],
+      "url": "Project URL if available"
+    }}
+  ],
+  "certifications": [
+    {{
+      "name": "Certification Name",
+      "issuer": "Issuing Organization",
+      "date": "Issue date",
+      "expiry_date": "Expiry date if available",
+      "credential_id": "ID if available",
+      "url": "Verification URL if available"
+    }}
+  ],
+  "languages": [
+    {{
+      "name": "Language Name",
+      "proficiency": "Proficiency Level"
+    }}
+  ],
+  "volunteer_experience": [
+    {{
+      "role": "Volunteer Role",
+      "organization": "Organization Name",
+      "duration": "Duration",
+      "description": "Description if available"
+    }}
+  ],
+  "awards": [
+    {{
+      "title": "Award Title",
+      "issuer": "Issuing Organization",
+      "date": "Award date",
+      "description": "Description if available"
+    }}
+  ]
+}}
 
-Return ONLY a valid JSON array with clean strings in this format:
-["Satya Nadella", "Chairman and CEO at Microsoft", "Redmond, Washington, United States", "Chairman and CEO at Microsoft (Feb 2014 - Present) - Greater Seattle Area", "The University of Chicago Booth School of Business (1994 - 1996)", "Artificial Intelligence", "Deep Learning"]
-
-Do not include any markdown formatting, code blocks, or extra text. Do not prefix each string with labels like "Name:" or "Headline:". Just return the raw values as clean strings in a JSON array.
-
-Include multiple entries for categories that have multiple items (e.g., multiple experiences, skills, etc.).
-Only include information that is actually present in the data.
+IMPORTANT: 
+- Return ONLY valid JSON, no markdown code blocks, no extra text
+- Include only information that is actually present in the data
+- If a section has no data, use an empty array [] or empty string ""
+- Ensure all JSON syntax is correct with proper quotes and commas
 
 Data:
 {data}
@@ -87,6 +159,9 @@ Data:
     model='gemini-2.0-flash-001', contents=prompt
     )
     
+    # Clean the response
+    cleaned_response = clean_gemini_response(response.text)
+    
     return {
-        "gemini_response": response.text
+        "gemini_response": cleaned_response
     }

@@ -1,8 +1,227 @@
 [
   {
-    "raw_response": "```json\n[\n  \"Bill Gates\",\n  \"Chair, Gates Foundation and Founder, Breakthrough Energy\",\n  \"Seattle, Washington, United States\",\n  \"https://gatesnot.es/tgn\",\n  \"Co-chair\",\n  \"Gates Foundation\",\n  \"2000 - Present \u00b7 25 yrs 6 mos\",\n  \"Founder\",\n  \"Breakthrough Energy\",\n  \"2015 - Present \u00b7 10 yrs 6 mos\",\n  \"Co-founder\",\n  \"Microsoft\",\n  \"1975 - Present \u00b7 50 yrs 6 mos\",\n  \"Harvard University\",\n  \"1973 - 1975\",\n  \"Lakeside School\"\n]\n```"
+    "name": "Satya Nadella",
+    "headline": "Chairman and CEO at Microsoft",
+    "location": "Redmond, Washington, United States",
+    "profile_image_url": null,
+    "experiences": [
+      {
+        "title": "Chairman and CEO",
+        "company": "Microsoft",
+        "duration": "Feb 2014 - Present",
+        "location": "Greater Seattle Area",
+        "description": null
+      },
+      {
+        "title": "Member Board Of Trustees",
+        "company": "University of Chicago",
+        "duration": "2018 - Present",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Board Member",
+        "company": "Starbucks",
+        "duration": "2017 - 2024",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Chairman",
+        "company": "The Business Council U.S.",
+        "duration": "2021 - 2023",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Board Member",
+        "company": "Fred Hutch",
+        "duration": "2016 - 2022",
+        "location": null,
+        "description": null
+      }
+    ],
+    "education": [
+      {
+        "institution": "The University of Chicago Booth School of Business",
+        "degree": null,
+        "field": null,
+        "duration": "1994 - 1996",
+        "description": null
+      },
+      {
+        "institution": "Manipal Institute of Technology",
+        "degree": "Bachelor\u2019s Degree",
+        "field": "Electrical Engineering",
+        "duration": null,
+        "description": null
+      }
+    ],
+    "skills": [],
+    "projects": [],
+    "certifications": [],
+    "languages": [],
+    "volunteer_experience": [],
+    "awards": []
   },
   {
-    "raw_response": "```json\n[\n  \"Jeff Weiner\",\n  \"Analytics, Strategy, AI, and Data Science Leader\",\n  \"Greater Minneapolis-St. Paul Area\",\n  \"Cardiology Marketing Analytics Manager\",\n  \"Boston Scientific\",\n  \"May 2025 - Present\",\n  \"Maple Grove, Minnesota, United States\",\n  \"Chief Data Analyst\",\n  \"Maple Grove Analytics\",\n  \"Mar 2010 - Present\",\n  \"Maple Grove, Minnesota, United States\",\n  \"I conduct analytics, research, and data projects for friends and their companies.\\n\\\"There are two people in the world that I trust to do this correctly, and I'm too busy.\\\" - former client\",\n  \"VP of Analytics, Data, and Configuration\",\n  \"Autura\",\n  \"Aug 2023 - Dec 2024\",\n  \"Remote\",\n  \"At Autura, I led data and analytics efforts for a fast-growing SaaS provider serving government agencies and the towing industry. I supported both internal teams and external municipal clients, as well as configuration of our flagship software for customers. My team and I used dbt, Snowflake, and Thoughspot to build data and analytics products for consumption across the organization. We also partnered with our AWS team to execute Gen AI pilots for our auction business.\\n\u2022 Cloud-Based Data Integration: Managed the successful transition from multiple legacy tech stacks for data and reporting to an integrated, cloud-based customer data and insights platform. Utilized Airbyte for ELT, Snowflake, dbt in AWS for data engineering, and Thoughtspot for business intelligence.\\n\u2022 Implemented Data Monetization Strategy: Partnered with sales and engineering teams to develop and implement a data monetization strategy and repeatable notification process for first notice of loss.\\n\u2022 Streamlined Client Onboarding: Took over configuration team and partnered with the implementation team to reduce new client configuration, enhancing operational efficiency, and client satisfaction.\",\n  \"Sr Director, Marketing Analytics\",\n  \"Collegis Education\",\n  \"Dec 2020 - Jun 2023\",\n  \"Bloomington, Minnesota, United States\",\n  \"I led a team focused on activating data via reporting and analytics for our higher education clients. Our goals were improving marketing efficiency and effectiveness for lead generation, enrollment growth, and retention improvement via the strategic use of data for 40+ colleges and universities. We partnered with our paid media team to deliver multi-touch attribution measurement and media optimization. We leveraged Google Cloud Platform, including Google Analytics 360 and Big Query, as well as Thoughtspot to drive client insights and reporting.\\n\u2022\\tCloud-Based Transformation: Transitioned the team from manual, Excel-based reporting to a cloud-based, self-service business intelligence model, improving efficiency, accessibility, and adoption.\",\n  \"Sr. Director, Analytics\",\n  \"One10 Marketing\",\n  \"May 2017 - Nov 2020\",\n  \"Greater Minneapolis-St. Paul Area\",\n  \"At One10, a company focused on improving productivity through sales incentives, training, employee recognition, incentive travel, and large-scale events, I led the analytics and research team. We leveraged SAS, Tableau, PowerBI, and Azure AI/Machine Learning to provide data-driven insights to clients.  My key contributions include:\\n\u2022\\tDeveloped a novel sales channel analytics framework: This framework optimized sales and profitability by enabling just-in-time training, recognition, and incentive programs for sales teams.\\n\u2022\\tLed IT infrastructure modernization: I partnered with IT to migrate our analytics environment to an Azure-based data and analytics platform, cutting costs by 63% while improving reliability and functionality.\\n\u2022\\tEstablished industry thought leadership: I frequently presented research and insights at major industry events, including closing keynotes at the 2016 SITE Global Meeting (Panama City) and a deep-dive session on training's impact on incentive travel at the 2019 SITE Global Meeting (Bangkok). I also actively participated in regional and national ISPI, SITE Young Leaders, and IMEX conferences.\",\n  \"University of Michigan\",\n  \"Bachelor of Science - BS\",\n  \"Statistics\",\n  \"Sep 1988 - May 1992\",\n  \"University of Minnesota\",\n  \"Master of Science - MS\",\n  \"Statistics\",\n  \"Sep 1992 - Jun 1994\",\n  \"Dashboard in a Day - Power BI\",\n  \"Pragmatic Works\",\n  \"Mar 2025\",\n  \"Principles of Marketing Research\",\n  \"University of Georgia\",\n  \"Feb 2006\",\n  \"Analytics\",\n  \"Data Strategies\",\n  \"Data Management\",\n  \"Data Analytics\",\n  \"Statistical Analysis\",\n  \"Team Leadership\",\n  \"Business-to-Business (B2B)\",\n  \"LTV\",\n  \"University Teaching\",\n  \"Data Governance\",\n  \"Lacrosse Coach, Marketing VP, Boys Lacrosse VP, Treasurer, President\",\n  \"Wayzata Lacrosse Association\",\n  \"Feb 2012 - Mar 2022\",\n  \"Coaching box and field lacrosse from 8U to JV, organizing participation in various leagues, etc. Have served as marketing and fundraising director,  boy's program commissioner, president, and treasurer of the association. Navigated the association through the COVID-19 pandemic.\",\n  \"Football Coach\",\n  \"Wayzata/Plymouth Youth Football\",\n  \"Aug 2011 - Oct 2012\",\n  \"Volunteer football coach - two seasons\",\n  \"President, Treasurer, Marketing and Fundraising, Boys Youth Commissioner\",\n  \"Wayzata Lacrosse Association\",\n  \"Sep 2013 - Mar 2022\",\n  \"Food Truck Organizer\",\n  \"Rosemary Woods Neighborhood\",\n  \"Jun 2020 - Nov 2021\",\n  \"Organized food truck visits to my neighborhood each week during the pandemic.  Achieved all three goals:  1) Help small businesses (food trucks) survive the pandemic. 2) Get neighbors together in a safe way.  3) I could get dinner from my favorite food trucks that I very much missed by walking no further than the end of my driveway.\",\n  \"English\",\n  \"Native or bilingual proficiency\",\n  \"French\",\n  \"Limited working proficiency\",\n  \"I have been in the data / analytics / data science / insights / marketing research space for my entire career, and most recently have spent time in AI. I build and lead high performing teams and systems to support analysis of all types of data. My work drives top line revenue growth and bottom line profitability by using analytics and research to reduce risk in brand and product development, optimization of staffing levels, improved relevance of marketing campaigns, and creation of key insights to identify new markets, among others.\\nHere are some examples:\\n- Autura:  My team and I built a cloud-based customer data platform that integrated data from multiple applications and created a single, well documented source of truth.  We topped it off with a powerful but easy to use business intelligence tool that was widely adopted by users.\\n- InsightRidge: Analytics across a client's customer base found over-mailing of the same catalogs to the same customers saving the client over $7 million per year.\\n- Capella University: A research study I championed provided confidence to maintain pricing levels on our largest and most degree profitable program despite a new competitor entering the market with tuition that was 20% lower. This study was designed, executed, and presented in less than 72 hours.\\n- Carlson Marketing: Analysis of a client's campaign performance identified an opportunity to increase trans-Atlantic business class segments by 4 percentage points.\\nI have experience in many industries, including automotive, consumer packaged goods (CPG), higher education, financial services, retail, technology (including SaaS), airlines, hotel, and gaming industries.\\nSpecialties: data, business intelligence, marketing, strategy, CRM, loyalty, marketing data, marketing analytics, predictive modeling, customer segmentation, customer lifetime value modeling, quantitative marketing research, qualitative research, customer experience management, digital marketing, marketing measurement, marketing attribution, big data, consumer behavior, economic modeling, marketing economics, financial modeling, team leadership, strategy, strategic planning, client management, analytics engineering, dbt, thoughtspot, snowflake, big query, aws, AI, google cloud platform, big query, data strategy, azure, power bi\"\n]\n```"
+    "name": "Bill Gates",
+    "headline": "Chair, Gates Foundation and Founder, Breakthrough Energy",
+    "location": "Seattle, Washington, United States",
+    "profile_image_url": "",
+    "experiences": [
+      {
+        "title": "Co-chair",
+        "company": "Gates Foundation",
+        "duration": "2000 - Present",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Founder",
+        "company": "Breakthrough Energy",
+        "duration": "2015 - Present",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Co-founder",
+        "company": "Microsoft",
+        "duration": "1975 - Present",
+        "location": "",
+        "description": ""
+      }
+    ],
+    "education": [
+      {
+        "institution": "Harvard University",
+        "degree": "",
+        "field": "",
+        "duration": "1973 - 1975",
+        "description": ""
+      },
+      {
+        "institution": "Lakeside School",
+        "degree": "",
+        "field": "",
+        "duration": "",
+        "description": ""
+      }
+    ],
+    "skills": [],
+    "projects": [],
+    "certifications": [],
+    "languages": [],
+    "volunteer_experience": [],
+    "awards": [],
+    "contact_info": "https://gatesnot.es/tgn",
+    "about": "Chair of the Gates Foundation. Founder of Breakthrough Energy. Co-founder of Microsoft. Voracious reader. Avid traveler. Active blogger."
+  },
+  {
+    "name": "Jeff Weiner",
+    "headline": "Analytics, Strategy, AI, and Data Science Leader",
+    "location": "Greater Minneapolis-St. Paul Area",
+    "profile_image_url": null,
+    "experiences": [
+      {
+        "title": "Cardiology Marketing Analytics Manager",
+        "company": "Boston Scientific",
+        "duration": "May 2025 - Present",
+        "location": "Maple Grove, Minnesota, United States",
+        "description": null
+      },
+      {
+        "title": "Chief Data Analyst",
+        "company": "Maple Grove Analytics",
+        "duration": "Mar 2010 - Present",
+        "location": "Maple Grove, Minnesota, United States",
+        "description": "I conduct analytics, research, and data projects for friends and their companies.\n\"There are two people in the world that I trust to do this correctly, and I'm too busy.\" - former client"
+      },
+      {
+        "title": "VP of Analytics, Data, and Configuration",
+        "company": "Autura",
+        "duration": "Aug 2023 - Dec 2024",
+        "location": "Remote",
+        "description": "At Autura, I led data and analytics efforts for a fast-growing SaaS provider serving government agencies and the towing industry. I supported both internal teams and external municipal clients, as well as configuration of our flagship software for customers. My team and I used dbt, Snowflake, and Thoughspot to build data and analytics products for consumption across the organization. We also partnered with our AWS team to execute Gen AI pilots for our auction business.\n\u2022 Cloud-Based Data Integration: Managed the successful transition from multiple legacy tech stacks for data and reporting to an integrated, cloud-based customer data and insights platform. Utilized Airbyte for ELT, Snowflake, dbt in AWS for data engineering, and Thoughtspot for business intelligence.\n\u2022 Implemented Data Monetization Strategy: Partnered with sales and engineering teams to develop and implement a data monetization strategy and repeatable notification process for first notice of loss.\n\u2022 Streamlined Client Onboarding: Took over configuration team and partnered with the implementation team to reduce new client configuration, enhancing operational efficiency, and client satisfaction."
+      },
+      {
+        "title": "Sr Director, Marketing Analytics",
+        "company": "Collegis Education",
+        "duration": "Dec 2020 - Jun 2023",
+        "location": "Bloomington, Minnesota, United States",
+        "description": "I led a team focused on activating data via reporting and analytics for our higher education clients. Our goals were improving marketing efficiency and effectiveness for lead generation, enrollment growth, and retention improvement via the strategic use of data for 40+ colleges and universities. We partnered with our paid media team to deliver multi-touch attribution measurement and media optimization. We leveraged Google Cloud Platform, including Google Analytics 360 and Big Query, as well as Thoughtspot to drive client insights and reporting.\n\u2022\tCloud-Based Transformation: Transitioned the team from manual, Excel-based reporting to a cloud-based, self-service business intelligence model, improving efficiency, accessibility, and adoption."
+      },
+      {
+        "title": "Sr. Director, Analytics",
+        "company": "One10 Marketing",
+        "duration": "May 2017 - Nov 2020",
+        "location": "Greater Minneapolis-St. Paul Area",
+        "description": "At One10, a company focused on improving productivity through sales incentives, training, employee recognition, incentive travel, and large-scale events, I led the analytics and research team. We leveraged SAS, Tableau, PowerBI, and Azure AI/Machine Learning to provide data-driven insights to clients.  My key contributions include:\n\u2022\tDeveloped a novel sales channel analytics framework: This framework optimized sales and profitability by enabling just-in-time training, recognition, and incentive programs for sales teams.\n\u2022\tLed IT infrastructure modernization: I partnered with IT to migrate our analytics environment to an Azure-based data and analytics platform, cutting costs by 63% while improving reliability and functionality.\n\u2022\tEstablished industry thought leadership: I frequently presented research and insights at major industry events, including closing keynotes at the 2016 SITE Global Meeting (Panama City) and a deep-dive session on training's impact on incentive travel at the 2019 SITE Global Meeting (Bangkok). I also actively participated in regional and national ISPI, SITE Young Leaders, and IMEX conferences."
+      }
+    ],
+    "education": [
+      {
+        "institution": "University of Michigan",
+        "degree": "Bachelor of Science - BS",
+        "field": "Statistics",
+        "duration": "Sep 1988 - May 1992",
+        "description": null
+      },
+      {
+        "institution": "University of Minnesota",
+        "degree": "Master of Science - MS",
+        "field": "Statistics",
+        "duration": "Sep 1992 - Jun 1994",
+        "description": null
+      }
+    ],
+    "skills": [
+      "University Teaching",
+      "Data Governance"
+    ],
+    "projects": [],
+    "certifications": [
+      {
+        "name": "Dashboard in a Day - Power BI",
+        "issuer": "Pragmatic Works",
+        "date": "Mar 2025",
+        "expiry_date": null,
+        "credential_id": null,
+        "url": null
+      },
+      {
+        "name": "Principles of Marketing Research",
+        "issuer": "University of Georgia",
+        "date": "Feb 2006",
+        "expiry_date": null,
+        "credential_id": null,
+        "url": null
+      }
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "proficiency": "Native or bilingual proficiency"
+      },
+      {
+        "name": "French",
+        "proficiency": "Limited working proficiency"
+      }
+    ],
+    "volunteer_experience": [
+      {
+        "role": "Lacrosse Coach, Marketing VP, Boys Lacrosse VP, Treasurer, President",
+        "organization": "Wayzata Lacrosse Association",
+        "duration": "Feb 2012 - Mar 2022",
+        "description": "Coaching box and field lacrosse from 8U to JV, organizing participation in various leagues, etc. Have served as marketing and fundraising director,  boy's program commissioner, president, and treasurer of the association. Navigated the association through the COVID-19 pandemic."
+      },
+      {
+        "role": "Football Coach",
+        "organization": "Wayzata/Plymouth Youth Football",
+        "duration": "Aug 2011 - Oct 2012",
+        "description": "Volunteer football coach - two seasons"
+      }
+    ],
+    "awards": []
   }
 ]
