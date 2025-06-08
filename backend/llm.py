@@ -81,7 +81,7 @@ Return a JSON object with the following structure:
   "name": "Full Name",
   "headline": "Professional headline/bio",
   "location": "City, State, Country",
-  "experiences": [
+  "experience": [
     {{
       "title": "Job Title",
       "company": "Company Name",
@@ -114,9 +114,26 @@ Return a JSON object with the following structure:
       "name": "Certification Name",
       "issuer": "Issuing Organization",
       "date": "Issue date",
-      "expiry_date": "Expiry date if available",
-      "credential_id": "ID if available",
+      "expiryDate": "Expiry date if available",
+      "credentialId": "ID if available",
       "url": "Verification URL if available"
+    }}
+  ],
+  "patents": [
+    {{
+      "title": "Patent Title",
+      "patentNumber": "Patent Number",
+      "date": "Filing or Grant Date",
+      "description": "Patent description",
+    }}
+  ],
+  "publications": [
+    {{
+      "title": "Publication Title",
+      "publisher": "Publisher",
+      "date": "Publication Date",
+      "description": "Abstract or description",
+      "url": "Publication URL or DOI if available"
     }}
   ],
   "languages": [
@@ -125,7 +142,7 @@ Return a JSON object with the following structure:
       "proficiency": "Proficiency Level"
     }}
   ],
-  "volunteer_experience": [
+  "volunteerExperience": [
     {{
       "role": "Volunteer Role",
       "organization": "Organization Name",

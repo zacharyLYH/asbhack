@@ -106,6 +106,7 @@ def process_single_profile(urls: list[str]):
                             gemini_response = gemini_response[4:].strip()
                     
                     parsed_data = json.loads(gemini_response)
+                    parsed_data["linkedinUrl"] = url
                     print("PARSED DATA: ", parsed_data)
                     # Validate that we got a valid structure (object or list)
                     if not isinstance(parsed_data, (dict, list)):
@@ -205,6 +206,7 @@ async def process_all_profiles():
                             gemini_response = gemini_response[4:].strip()
                     
                     parsed_data = json.loads(gemini_response)
+                    parsed_data["linkedinUrl"] = url
                     
                     # Validate that we got a valid structure (object or list)
                     if not isinstance(parsed_data, (dict, list)):
