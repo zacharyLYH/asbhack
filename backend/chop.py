@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 import logging
 import shutil
+import re
 from typing import Union
 
 # Set up logging
@@ -12,6 +13,7 @@ logger = logging.getLogger(__name__)
 def clean_html(html_content: str) -> str:
     """
     Clean HTML content by removing non-essential elements while preserving <p> and <span> tags.
+    Also handles JSON blocks and improves text cleaning.
     Returns plain text content.
     """
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -20,6 +22,10 @@ def clean_html(html_content: str) -> str:
     for element in soup(['script', 'style', 'meta', 'link', 'button', 'nav', 'header', 'footer']):
         element.decompose()
     
+    # Remove JSON blocks
+    for element in soup.find_all(text=lambda text: isinstance(text, str) and text.strip().startswith('{')):
+        element.replace_with('')
+    
     # Keep only p and span tags, remove others but keep their content
     for tag in soup.find_all():
         if tag.name not in ['p', 'span']:
@@ -27,9 +33,24 @@ def clean_html(html_content: str) -> str:
     
     # Get text content and clean it up
     text = soup.get_text(separator='\n', strip=True)
-    # Remove extra blank lines
-    text = '\n'.join(line for line in text.splitlines() if line.strip())
-    return text
+    
+    # Clean up the text
+    lines = []
+    for line in text.splitlines():
+        line = line.strip()
+        # Skip empty lines and lines that are just JSON
+        if not line or line.startswith('{'):
+            continue
+        # Skip lines that are just status messages
+        if line.lower().startswith(('status is', 'request:', 'method:', 'headers:')):
+            continue
+        lines.append(line)
+    
+    # Join lines and remove multiple consecutive newlines
+    text = '\n'.join(lines)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    
+    return text.strip()
 
 def process_html_files(input_dir: Union[str, Path], output_dir: Union[str, Path]) -> None:
     """
@@ -48,6 +69,7 @@ def process_html_files(input_dir: Union[str, Path], output_dir: Union[str, Path]
     
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
+    clean_root_directory("data/chopped/data")
     
     # Process all HTML files in the input directory
     for input_path in input_dir.rglob('*.html'):
