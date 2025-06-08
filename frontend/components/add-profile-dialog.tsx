@@ -56,6 +56,7 @@ export function AddProfileDialog() {
         method: "POST",
         body: JSON.stringify({ urls }),
       })
+      console.log(response)
       setIsOpen(false)
     } catch (error) {
       console.error('Error adding profiles:', error)

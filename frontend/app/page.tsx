@@ -15,7 +15,12 @@ export default function Dashboard() {
   const [filteredProfiles, setFilteredProfiles] = useState<LinkedInProfile[]>([])
 
   useEffect(() => {
-    //make small api call to get profiles
+    const fetchProfiles = async () => {
+      const response = await fetch("http://localhost:8000/api/profiles")
+      const data = await response.json()
+      setProfiles(data)
+    }
+    fetchProfiles()
     setFilteredProfiles(mockProfiles)
     setProfiles(mockProfiles)
   }, [])

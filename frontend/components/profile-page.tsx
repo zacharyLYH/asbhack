@@ -2,7 +2,7 @@
 
 import { LinkedInProfile } from "@/lib/types"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 function LoadingSpinner() {
   return (
@@ -21,11 +21,10 @@ function LoadingSpinner() {
   )
 }
 
-export default function ProfilePage() {
+export default function ProfilePage({profile}: {profile: LinkedInProfile}) {
   const searchParams = useSearchParams()
   const url = searchParams.get("url")
   const [isLoading, setIsLoading] = useState(true)
-  const [profile, setProfile] = useState<LinkedInProfile | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   if (!url) {
@@ -65,5 +64,12 @@ export default function ProfilePage() {
     )
   }
 
-  return <div>{url}</div>
+  return (
+    <div className="p-6">
+      <h2 className="text-xl font-bold mb-4">Raw Profile Data</h2>
+      <pre className="bg-gray-100 p-4 rounded-lg overflow-auto text-sm">
+        {JSON.stringify(profile, null, 2)}
+      </pre>
+    </div>
+  )
 }
