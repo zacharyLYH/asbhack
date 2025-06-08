@@ -1,12 +1,12 @@
 "use client"
 
-import { useMemo } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import { MapPin, Briefcase, Users, TrendingUp } from "lucide-react"
 import type { LinkedInProfile } from "@/lib/types"
+import { Briefcase, MapPin, TrendingUp, Users } from "lucide-react"
+import { useMemo } from "react"
+import { Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 interface AnalyticsViewProps {
   profiles: LinkedInProfile[]
@@ -78,12 +78,15 @@ export function AnalyticsView({ profiles }: AnalyticsViewProps) {
     const educationLevels = profiles.reduce(
       (acc, profile) => {
         profile.education?.forEach((edu) => {
+          if (!edu.degree) return
+          
+          const degreeLower = edu.degree.toLowerCase()
           const level =
-            edu.degree.toLowerCase().includes("phd") || edu.degree.toLowerCase().includes("doctorate")
+            degreeLower.includes("phd") || degreeLower.includes("doctorate")
               ? "PhD/Doctorate"
-              : edu.degree.toLowerCase().includes("master") || edu.degree.toLowerCase().includes("mba")
+              : degreeLower.includes("master") || degreeLower.includes("mba")
                 ? "Masters"
-                : edu.degree.toLowerCase().includes("bachelor")
+                : degreeLower.includes("bachelor")
                   ? "Bachelors"
                   : "Other"
           acc[level] = (acc[level] || 0) + 1

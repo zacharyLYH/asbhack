@@ -1,5 +1,7 @@
 "use client"
 
+import { ChatButton } from "@/components/chat-button"
+import { ChatPopup } from "@/components/chat-popup"
 import { ProfileCard } from "@/components/profile-card"
 import { ProfileFilters } from "@/components/profile-filters"
 import { ProfileTable } from "@/components/profile-table"
@@ -21,6 +23,7 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid")
   const [sortBy, setSortBy] = useState("name")
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
+  const [isChatOpen, setIsChatOpen] = useState(false)
 
   const stats = useMemo(() => {
     // Ensure filteredProfiles is always an array
@@ -59,7 +62,8 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
   }, [filteredProfiles, sortBy, sortOrder])
 
   return (
-    <div className="space-y-6">
+    <>
+      <div className="space-y-6">
       {/* Stats Overview */}
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
@@ -164,5 +168,10 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
         </div>
       </div>
     </div>
+
+      {/* Chat Components */}
+      <ChatButton onClick={() => setIsChatOpen(true)} />
+      <ChatPopup isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+    </>
   )
 }
