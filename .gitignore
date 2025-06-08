@@ -1,4 +1,4 @@
 backend/venv
 /venv
 .env
-backend/pycache/
+backend/__pycache__/
