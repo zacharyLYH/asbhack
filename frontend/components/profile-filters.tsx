@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { X } from "lucide-react"
 import type { LinkedInProfile } from "@/lib/types"
+import { X } from "lucide-react"
+import { useEffect, useState } from "react"
 
 interface ProfileFiltersProps {
   profiles: LinkedInProfile[]
@@ -41,13 +41,16 @@ export function ProfileFilters({ profiles, onFilterChange }: ProfileFiltersProps
   })
 
   // Extract unique values for filter options
-  const uniqueLocations = Array.from(new Set(profiles.map((p) => p.location).filter(Boolean)))
-  const uniqueCompanies = Array.from(new Set(profiles.flatMap((p) => p.experience?.map((e) => e.company) || [])))
-  const uniqueSkills = Array.from(new Set(profiles.flatMap((p) => p.skills || []))).slice(0, 20) // Limit to top 20 skills
+  // Ensure profiles is always an array
+  const safeProfiles = Array.isArray(profiles) ? profiles : []
+  
+  const uniqueLocations = Array.from(new Set(safeProfiles.map((p) => p.location).filter(Boolean)))
+  const uniqueCompanies = Array.from(new Set(safeProfiles.flatMap((p) => p.experience?.map((e) => e.company) || [])))
+  const uniqueSkills = Array.from(new Set(safeProfiles.flatMap((p) => p.skills || []))).slice(0, 20) // Limit to top 20 skills
 
   // Apply filters
   useEffect(() => {
-    let filtered = profiles
+    let filtered = safeProfiles
 
     // Search filter
     if (filters.search) {

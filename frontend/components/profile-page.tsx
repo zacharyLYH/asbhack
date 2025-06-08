@@ -17,7 +17,7 @@ export default function ProfilePage({profile}: {profile: LinkedInProfile}) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2">
       {/* Header */}
       <div className="flex items-start gap-4">
         <div className="flex-1">

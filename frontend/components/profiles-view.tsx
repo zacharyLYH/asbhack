@@ -23,12 +23,15 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
 
   const stats = useMemo(() => {
-    const locations = new Set(filteredProfiles.map((p) => p.location).filter(Boolean))
-    const companies = new Set(filteredProfiles.flatMap((p) => p.experience?.map((e) => e.company) || []))
-    const universities = new Set(filteredProfiles.flatMap((p) => p.education?.map((e) => e.institution) || []))
+    // Ensure filteredProfiles is always an array
+    const safeProfiles = Array.isArray(filteredProfiles) ? filteredProfiles : []
+    
+    const locations = new Set(safeProfiles.map((p) => p.location).filter(Boolean))
+    const companies = new Set(safeProfiles.flatMap((p) => p.experience?.map((e) => e.company) || []))
+    const universities = new Set(safeProfiles.flatMap((p) => p.education?.map((e) => e.institution) || []))
 
     return {
-      total: filteredProfiles.length,
+      total: safeProfiles.length,
       locations: locations.size,
       companies: companies.size,
       universities: universities.size,
@@ -36,7 +39,11 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
   }, [filteredProfiles])
 
   const sortedProfiles = useMemo(() => {
-    return [...filteredProfiles].sort((a, b) => {
+    
+    // Ensure filteredProfiles is always an array
+    const safeProfiles = Array.isArray(filteredProfiles) ? filteredProfiles : []
+    
+    return [...safeProfiles].sort((a, b) => {
       let aValue: any = a[sortBy as keyof LinkedInProfile]
       let bValue: any = b[sortBy as keyof LinkedInProfile]
 
