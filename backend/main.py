@@ -53,14 +53,19 @@ async def update_urls(request: URLRequest):
         os.makedirs(urls_dir, exist_ok=True)
 
         #strip url
+        request.urls = [url.strip() for url in request.urls]
         
         # Write URLs to file (one per line)
         urls_file_path = os.path.join(urls_dir, "url.txt")
         with open(urls_file_path, 'a') as f:
             for url in request.urls:
+                print("WRITING URL: ", url)
                 f.write(f"{url.strip()}\n")
+
         scrape_a_few_profiles(request.urls)
+        print("SCRAPED PROFILES")
         process_single_profile(request.urls)
+        print("PROCESSED PROFILES")
         
         return URLResponse(
             message="URLs updated successfully",

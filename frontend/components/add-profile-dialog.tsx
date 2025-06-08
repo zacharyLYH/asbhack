@@ -52,12 +52,17 @@ export function AddProfileDialog() {
 
     setIsLoading(true)
     try {
-      const response = await fetch("/api/update-urls", {
+      const response = await fetch("http://localhost:8000/update-urls", {
         method: "POST",
-        body: JSON.stringify({ urls }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ urls: validUrls }),
       })
-      console.log(response)
+      const data = await response.json()
+      console.log(data)
       setIsOpen(false)
+      window.location.reload()
     } catch (error) {
       console.error('Error adding profiles:', error)
     } finally {

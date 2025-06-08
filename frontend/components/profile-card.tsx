@@ -4,8 +4,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import type { LinkedInProfile } from "@/lib/types"
 import { Award, Briefcase, ExternalLink, GraduationCap, Mail, MapPin } from "lucide-react"
+import ProfilePage from "./profile-page"
 
 interface ProfileCardProps {
   profile: LinkedInProfile
@@ -28,7 +30,6 @@ export function ProfileCard({ profile }: ProfileCardProps) {
       <CardHeader className="pb-3">
         <div className="flex items-start gap-3">
           <Avatar className="h-12 w-12">
-            <AvatarImage src={profile.profileImage || "/placeholder.svg"} />
             <AvatarFallback>{getInitials(profile.name || "")}</AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
@@ -93,12 +94,21 @@ export function ProfileCard({ profile }: ProfileCardProps) {
         )}
 
         <div className="flex gap-2 pt-2">
-          <Button size="sm" variant="outline" className="flex-1 text-xs" onClick={() => {
-            window.open("/profiles?url=" + profile.linkedinUrl, "_blank")
-          }}>
-            <ExternalLink className="h-3 w-3 mr-1" />
-            View Profile
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild> 
+              <Button size="sm" variant="outline" className="flex-1 text-xs">
+                <ExternalLink className="h-3 w-3 mr-1" />
+                View Profile
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Profile</DialogTitle>
+              </DialogHeader>
+              <ProfilePage profile={profile} /> 
+            </DialogContent>
+          </Dialog>
+            
           {/* create a new page to send email to the profile */}
           <Button size="sm" variant="outline" className="flex-1 text-xs">
             <Mail className="h-3 w-3 mr-1" />

@@ -6,23 +6,22 @@ import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard-header"
 import { ProfilesView } from "@/components/profiles-view"
 import { AnalyticsView } from "@/components/analytics-view"
-import { mockProfiles } from "@/lib/mock-data"
+// import { mockProfiles } from "@/lib/mock-data"
 import { LinkedInProfile } from "@/lib/types"
 
 export default function Dashboard() {
   const [currentView, setCurrentView] = useState("profiles")
-  const [profiles, setProfiles] = useState<LinkedInProfile[]>(mockProfiles)
+  const [profiles, setProfiles] = useState<LinkedInProfile[]>([])
   const [filteredProfiles, setFilteredProfiles] = useState<LinkedInProfile[]>([])
 
   useEffect(() => {
     const fetchProfiles = async () => {
-      const response = await fetch("http://localhost:8000/api/profiles")
+      const response = await fetch("http://localhost:8000/profiles")
       const data = await response.json()
       setProfiles(data)
+      setFilteredProfiles(data)
     }
     fetchProfiles()
-    setFilteredProfiles(mockProfiles)
-    setProfiles(mockProfiles)
   }, [])
 
   return (

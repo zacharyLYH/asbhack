@@ -3,7 +3,6 @@ export interface LinkedInProfile {
     name?: string
     headline?: string
     location?: string
-    profileImage?: string
     experience?: Experience[]
     education?: Education[]
     skills?: string[]

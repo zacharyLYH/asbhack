@@ -28,6 +28,7 @@ interface FilterState {
 }
 
 export function ProfileFilters({ profiles, onFilterChange }: ProfileFiltersProps) {
+  
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     locations: [],

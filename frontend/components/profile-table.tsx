@@ -1,11 +1,11 @@
 'use client'
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ExternalLink, Mail } from "lucide-react"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { LinkedInProfile } from "@/lib/types"
+import { ExternalLink, Mail } from "lucide-react"
 
 interface ProfileTableProps {
   profiles: LinkedInProfile[]
@@ -34,12 +34,12 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {profiles.map((profile) => {
+          {profiles.map((profile, index) => {
             const currentJob = profile.experience?.[0]
             const latestEducation = profile.education?.[0]
 
             return (
-              <TableRow key={profile.linkedinUrl}>
+              <TableRow key={profile.linkedinUrl || `profile-${index}`}>
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar className="h-8 w-8">
@@ -80,8 +80,8 @@ export function ProfileTable({ profiles }: ProfileTableProps) {
                 <TableCell>
                   {profile.skills && profile.skills.length > 0 ? (
                     <div className="flex flex-wrap gap-1 max-w-xs">
-                      {profile.skills.slice(0, 2).map((skill, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
+                      {profile.skills.slice(0, 2).map((skill, skillIndex) => (
+                        <Badge key={`${profile.linkedinUrl}-skill-${skillIndex}`} variant="secondary" className="text-xs">
                           {skill}
                         </Badge>
                       ))}

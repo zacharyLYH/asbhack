@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useMemo } from "react"
 import { ProfileCard } from "@/components/profile-card"
-import { ProfileTable } from "@/components/profile-table"
 import { ProfileFilters } from "@/components/profile-filters"
+import { ProfileTable } from "@/components/profile-table"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Grid, List, Users, MapPin, Briefcase, GraduationCap } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
 import type { LinkedInProfile } from "@/lib/types"
+import { Briefcase, GraduationCap, Grid, List, MapPin, Users } from "lucide-react"
+import { useMemo, useState } from "react"
 
 interface ProfilesViewProps {
   profiles: LinkedInProfile[]
@@ -144,8 +144,8 @@ export function ProfilesView({ profiles, filteredProfiles, onFilterChange }: Pro
 
             <TabsContent value="grid" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {sortedProfiles.map((profile) => (
-                  <ProfileCard key={profile.linkedinUrl} profile={profile} />
+                {sortedProfiles.map((profile, index) => (
+                  <ProfileCard key={profile.linkedinUrl || `profile-${index}`} profile={profile} />
                 ))}
               </div>
             </TabsContent>
