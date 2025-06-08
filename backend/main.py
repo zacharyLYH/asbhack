@@ -118,7 +118,12 @@ async def process_all_profiles():
                     success=False,
                     error=str(e)
                 ))
-        print(results, len(urls), successful, len(urls) - successful, file=open("tempfile.txt", "w"))
+        
+        # Extract just the data from successful responses
+        profile_data = [result.data for result in results if result.success and result.data]
+        with open("tempfile.txt", "w") as f:
+            json.dump(profile_data, f, indent=2)
+        
         return ProcessResponse(
             results=results,
             total_processed=len(urls),
@@ -130,6 +135,23 @@ async def process_all_profiles():
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing profiles: {str(e)}")
+
+@app.get("/profiles")
+async def read_cached_profile():
+    """Read cached profile data."""
+    try:
+        # Read the JSON file using context manager for better file handling
+        with open("tempfile.txt", 'r') as f:
+            profile_data = json.load(f)
+        
+        return profile_data
+    
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="No cached profile data found. Please process profiles first.")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Error parsing cached profile data")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading profile: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn
