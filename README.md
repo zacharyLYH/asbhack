@@ -1,27 +1,36 @@
 # asbhack
 
 # Steps:
-1. 
+
+1.
+
 ```
 pip3 install -r backend/requirements.txt
 ```
-2. 
+
+2.
+
 ```
 touch /backend/.env
 ```
+
 3. Enter your credentials
+
 ```
 LINKEDIN_EMAIL=
 LINKEDIN_PASSWORD=
 ```
-4. 
+
+4.
+
 ```
 python3 backend/linkedin_scraper.py
 ```
 
-
 # IGNORE
+
 Deps:
+
 ```
 <!-- pip3 install pandas
 pip3 install selenium

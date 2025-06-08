@@ -17,12 +17,19 @@ def run_scraper():
     
     # Login with custom function
     if login_to_linkedin(driver, os.getenv("LINKEDIN_EMAIL"), os.getenv("LINKEDIN_PASSWORD")):
-        # List of profiles to scrape
-        profiles = [
-            "https://www.linkedin.com/in/satyanadella/",
-            "https://www.linkedin.com/in/williamhgates/",
-            "https://www.linkedin.com/in/jeffweiner/"
-        ]
+        # Read profiles from urls.txt file
+        profiles = []
+        urls_file_path = "data/urls/url.txt"
+        
+        try:
+            if os.path.exists(urls_file_path):
+                with open(urls_file_path, 'r') as f:
+                    profiles = [line.strip() for line in f.readlines() if line.strip()]
+            else:
+                print("URLs file not found. Using empty profile list.")
+        except Exception as e:
+            print(f"Error reading URLs file: {e}. Using empty profile list.")
+            profiles = []
         
         # Save HTML for each profile
         for profile_url in profiles:
