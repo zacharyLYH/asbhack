@@ -4,18 +4,14 @@ from scrape_profile import login_to_linkedin, save_html
 from selenium import webdriver
 import os
 from dotenv import load_dotenv
-import shutil
+from chop import process_html_files, clean_root_directory
 
 def run_scraper():
     """Run the LinkedIn scraper."""
     print(f"Running scraper at {time.strftime('%Y-%m-%d %H:%M:%S')}")
     
     # Delete all files in the data directory
-    data_dir = "data"
-    if os.path.exists(data_dir):
-        shutil.rmtree(data_dir)
-    os.makedirs(data_dir)
-    print("Cleared data directory")
+    clean_root_directory("data")
     
     driver = webdriver.Chrome()
     
@@ -32,6 +28,7 @@ def run_scraper():
         for profile_url in profiles:
             save_html(driver, profile_url)
             time.sleep(2)  # Small delay between profiles
+        process_html_files("data", "data/chopped/data")
     else:
         print("Failed to login. Please check your credentials and try again.")
     

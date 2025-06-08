@@ -69,23 +69,3 @@ def save_html(driver, profile_url, output_dir="data"):
     except Exception as e:
         print(f"Error saving HTML: {str(e)}")
         return None
-
-load_dotenv()
-
-driver = webdriver.Chrome()
-
-# Login with custom function
-if login_to_linkedin(driver, os.getenv("LINKEDIN_EMAIL"), os.getenv("LINKEDIN_PASSWORD")):
-    # List of profiles to scrape
-    profiles = [
-        "https://www.linkedin.com/in/satyanadella/",
-        "https://www.linkedin.com/in/williamhgates/",
-        "https://www.linkedin.com/in/jeffweiner/"
-    ]
-    
-    # Save HTML for each profile
-    for profile_url in profiles:
-        save_html(driver, profile_url)
-        time.sleep(2)  # Small delay between profiles
-else:
-    print("Failed to login. Please check your credentials and try again.") 
