@@ -25,6 +25,9 @@ app.add_middleware(
 class URLRequest(BaseModel):
     urls: List[str]
 
+class SingleURLRequest(BaseModel):
+    url: str
+
 class URLResponse(BaseModel):
     message: str
     count: int
@@ -48,13 +51,16 @@ async def update_urls(request: URLRequest):
         # Ensure the directory exists
         urls_dir = "data/urls"
         os.makedirs(urls_dir, exist_ok=True)
+
+        #strip url
         
         # Write URLs to file (one per line)
         urls_file_path = os.path.join(urls_dir, "url.txt")
-        with open(urls_file_path, 'w') as f:
+        with open(urls_file_path, 'a') as f:
             for url in request.urls:
                 f.write(f"{url.strip()}\n")
         scrape_a_few_profiles(request.urls)
+        process_single_profile(request.urls)
         
         return URLResponse(
             message="URLs updated successfully",
@@ -68,6 +74,90 @@ async def update_urls(request: URLRequest):
 async def root():
     """Health check endpoint."""
     return {"message": "LinkedIn Scraper API is running"}
+
+def process_single_profile(urls: list[str]):
+    """Process a single LinkedIn URL and extract profile information using Gemini API."""
+    try:
+        # Get Gemini API key from environment
+        gemini_api_key = os.getenv("GEMINI_API_KEY")
+        if not gemini_api_key:
+            raise HTTPException(status_code=500, detail="GEMINI_API_KEY environment variable not set")
+        
+        for url in urls:
+            try:
+                # Process the URL using the LLM function
+                response = process_linkedin_url(url, gemini_api_key)
+
+                # Try to parse the JSON response from Gemini with better error handling
+                try:
+                    gemini_response = response["gemini_response"]
+                    print("GEMINI RESPONSE: ", gemini_response)
+                    print(f"Raw Gemini response for {url}: {gemini_response}")
+                    
+                    # Additional cleaning in case the LLM function didn't catch everything
+                    if gemini_response.startswith('```') and gemini_response.endswith('```'):
+                        gemini_response = gemini_response.strip('```').strip()
+                        if gemini_response.startswith('json'):
+                            gemini_response = gemini_response[4:].strip()
+                    
+                    parsed_data = json.loads(gemini_response)
+                    print("PARSED DATA: ", parsed_data)
+                    # Validate that we got a valid structure (object or list)
+                    if not isinstance(parsed_data, (dict, list)):
+                        raise ValueError("Response is not a valid JSON object or array")
+                        
+                except (json.JSONDecodeError, ValueError) as e:
+                    print(f"JSON parsing failed for {url}: {e}")
+                    print(f"Raw response: {response['gemini_response']}")
+                    # If JSON parsing fails, return structured error info
+                    parsed_data = {
+                        "error": "Failed to parse JSON response",
+                        "raw_response": response["gemini_response"],
+                        "parse_error": str(e)
+                    }
+                
+                # Add the processed profile to tempfile.txt
+                if parsed_data and not parsed_data.get("error"):
+                    try:
+                        # Read existing profile data
+                        existing_data = []
+                        tempfile_path = "tempfile.txt"
+                        
+                        if os.path.exists(tempfile_path):
+                            try:
+                                with open(tempfile_path, 'r') as f:
+                                    existing_data = json.load(f)
+                            except (json.JSONDecodeError, FileNotFoundError):
+                                existing_data = []
+                        
+                        # Add new profile data to existing data
+                        existing_data.append(parsed_data)
+                        
+                        # Write updated data back to file
+                        with open(tempfile_path, 'w') as f:
+                            json.dump(existing_data, f, indent=2)
+                            
+                    except Exception as file_error:
+                        print(f"Warning: Failed to update tempfile.txt: {file_error}")
+                
+                return ProfileResponse(
+                    url=url,
+                    success=True,
+                    data=parsed_data
+                )
+            
+            except Exception as e:
+                print(f"Error processing {url}: {e}")
+                return ProfileResponse(
+                    url=url,
+                    success=False,
+                    error=str(e)
+                )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing profile: {str(e)}")
 
 @app.get("/process-profiles", response_model=ProcessResponse)
 async def process_all_profiles():
