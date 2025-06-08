@@ -116,7 +116,7 @@ async def process_all_profiles():
                     success=False,
                     error=str(e)
                 ))
-        
+        print(results, len(urls), successful, len(urls) - successful, file=open("tempfile.txt", "w"))
         return ProcessResponse(
             results=results,
             total_processed=len(urls),
