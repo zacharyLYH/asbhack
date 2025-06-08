@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchProfiles = async () => {
-      const response = await fetch("http://localhost:8000/profiles")
+      const response = await fetch("http://0.0.0.0:8000/profiles")
       const data = await response.json()
       setProfiles(data)
       setFilteredProfiles(data)
