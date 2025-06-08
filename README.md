@@ -30,7 +30,7 @@ python3 backend/main.py
 
 5.
 ```
-cd frontend && bun install && bun dev
+curl -fsSL https://bun.sh/install | bash && cd frontend && bun install && bun dev
 cd backend && python3 main.py
 ```
 
