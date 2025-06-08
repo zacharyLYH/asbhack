@@ -1,3 +1,234 @@
 [
-
+  {
+    "name": "Bill George",
+    "headline": "Executive Education Fellow at Harvard Business School, former Medtronic CEO, and Best-selling Author | True North Emerging Leader Edition available now!",
+    "location": "Minneapolis, Minnesota, United States",
+    "experience": [
+      {
+        "title": "Executive Fellow",
+        "company": "Harvard Business School",
+        "duration": "Jun 2022 - Present",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Author",
+        "company": "True North by Bill George",
+        "duration": "May 2022 - Present",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Professor and Senior Fellow",
+        "company": "Harvard",
+        "duration": "Jan 2004 - Jun 2022",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Chairman and CEO",
+        "company": "Medtronic",
+        "duration": "Mar 1989 - May 2002",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Executive Vice President",
+        "company": "Honeywell",
+        "duration": "Sep 1978 - Mar 1989",
+        "location": "",
+        "description": ""
+      }
+    ],
+    "education": [
+      {
+        "institution": "Harvard Business School",
+        "degree": "MBA (with High Distinction)",
+        "field": "",
+        "duration": "1964 - 1966",
+        "description": "Activities and societies: George F. Baker Scholar"
+      },
+      {
+        "institution": "Georgia Institute of Technology",
+        "degree": "BSIE, Industrial & Systems Engineering",
+        "field": "",
+        "duration": "1960 - 1964",
+        "description": ""
+      }
+    ],
+    "skills": [
+      "Leadership Development",
+      "Strategy"
+    ],
+    "projects": [],
+    "certifications": [
+      {
+        "name": "Leading in Crisis",
+        "issuer": "LinkedIn",
+        "date": "Apr 2020",
+        "expiryDate": "",
+        "credentialId": "",
+        "url": ""
+      }
+    ],
+    "patents": [],
+    "publications": [],
+    "languages": [],
+    "volunteerExperience": [],
+    "awards": [],
+    "linkedinUrl": "https://www.linkedin.com/in/williamwgeorge"
+  },
+  {
+    "name": "Bill George",
+    "headline": "Executive Education Fellow at Harvard Business School, former Medtronic CEO, and Best-selling Author | True North Emerging Leader Edition available now!",
+    "location": "Minneapolis, Minnesota, United States",
+    "experience": [
+      {
+        "title": "Executive Fellow",
+        "company": "Harvard Business School",
+        "duration": "Jun 2022 - Present",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Author",
+        "company": "True North by Bill George",
+        "duration": "May 2022 - Present",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Professor and Senior Fellow",
+        "company": "Harvard",
+        "duration": "Jan 2004 - Jun 2022",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Chairman and CEO",
+        "company": "Medtronic",
+        "duration": "Mar 1989 - May 2002",
+        "location": null,
+        "description": null
+      },
+      {
+        "title": "Executive Vice President",
+        "company": "Honeywell",
+        "duration": "Sep 1978 - Mar 1989",
+        "location": null,
+        "description": null
+      }
+    ],
+    "education": [
+      {
+        "institution": "Harvard Business School",
+        "degree": "MBA (with High Distinction)",
+        "field": null,
+        "duration": "1964 - 1966",
+        "description": "Activities and societies: George F. Baker Scholar"
+      },
+      {
+        "institution": "Georgia Institute of Technology",
+        "degree": "BSIE, Industrial & Systems Engineering",
+        "field": null,
+        "duration": "1960 - 1964",
+        "description": null
+      }
+    ],
+    "skills": [
+      "Leadership Development",
+      "Strategy"
+    ],
+    "projects": [],
+    "certifications": [
+      {
+        "name": "Leading in Crisis",
+        "issuer": "LinkedIn",
+        "date": "Apr 2020",
+        "expiryDate": null,
+        "credentialId": null,
+        "url": null
+      }
+    ],
+    "patents": [],
+    "publications": [],
+    "languages": [],
+    "volunteerExperience": [],
+    "awards": [
+      {
+        "title": "Bower Award for Business Leadership",
+        "issuer": "The Franklin Institute",
+        "date": "2014",
+        "description": null
+      }
+    ],
+    "linkedinUrl": "https://www.linkedin.com/in/williamwgeorge"
+  },
+  {
+    "name": "Satya Nadella",
+    "headline": "Chairman and CEO at Microsoft",
+    "location": "Redmond, Washington, United States",
+    "experience": [
+      {
+        "title": "Chairman and CEO",
+        "company": "Microsoft",
+        "duration": "Feb 2014 - Present",
+        "location": "Greater Seattle Area",
+        "description": ""
+      },
+      {
+        "title": "Member Board Of Trustees",
+        "company": "University of Chicago",
+        "duration": "2018 - Present",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Board Member",
+        "company": "Starbucks",
+        "duration": "2017 - 2024",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Chairman",
+        "company": "The Business Council U.S.",
+        "duration": "2021 - 2023",
+        "location": "",
+        "description": ""
+      },
+      {
+        "title": "Board Member",
+        "company": "Fred Hutch",
+        "duration": "2016 - 2022",
+        "location": "",
+        "description": ""
+      }
+    ],
+    "education": [
+      {
+        "institution": "The University of Chicago Booth School of Business",
+        "degree": "",
+        "field": "",
+        "duration": "1994 - 1996",
+        "description": ""
+      },
+      {
+        "institution": "Manipal Institute of Technology",
+        "degree": "Bachelor\u2019s Degree",
+        "field": "Electrical Engineering",
+        "duration": "",
+        "description": ""
+      }
+    ],
+    "skills": [],
+    "projects": [],
+    "certifications": [],
+    "patents": [],
+    "publications": [],
+    "languages": [],
+    "volunteerExperience": [],
+    "awards": [],
+    "linkedinUrl": "https://www.linkedin.com/in/satyanadella"
+  }
 ]

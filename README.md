@@ -19,6 +19,7 @@ touch /backend/.env
 ```
 LINKEDIN_EMAIL=
 LINKEDIN_PASSWORD=
+GEMINI_API_KEY=
 ```
 
 4.
@@ -27,20 +28,9 @@ LINKEDIN_PASSWORD=
 python3 backend/linkedin_scraper.py
 ```
 
-# IGNORE
-
-Deps:
-
+5.
 ```
-<!-- pip3 install pandas
-pip3 install selenium
-pip3 install beautifulsoup4
-pip3 install fastapi -->
-
-#bun
-curl -fsSL https://bun.sh/install | bash
-cd frontend
-bun install
-bun run build
-bun run start
+cd frontend && bun dev
+cd backend && python3 main.py
 ```
+
