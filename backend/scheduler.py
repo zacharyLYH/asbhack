@@ -6,6 +6,27 @@ import os
 from dotenv import load_dotenv
 from chop import process_html_files, clean_root_directory
 
+def scrape_a_few_profiles(profiles: list[str]):
+    """Run the LinkedIn scraper."""
+    print(f"Running scraper at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # Delete all files in the data directory
+    clean_root_directory("data")
+    
+    driver = webdriver.Chrome()
+    
+    # Login with custom function
+    if login_to_linkedin(driver, os.getenv("LINKEDIN_EMAIL"), os.getenv("LINKEDIN_PASSWORD")):
+        # Save HTML for each profile
+        for profile_url in profiles:
+            save_html(driver, profile_url)
+            time.sleep(2)  # Small delay between profiles
+        process_html_files("data", "data/chopped/data", should_clean=False)
+    else:
+        print("Failed to login. Please check your credentials and try again.")
+    
+    driver.quit()
+
 def run_scraper():
     """Run the LinkedIn scraper."""
     print(f"Running scraper at {time.strftime('%Y-%m-%d %H:%M:%S')}")
@@ -35,7 +56,7 @@ def run_scraper():
         for profile_url in profiles:
             save_html(driver, profile_url)
             time.sleep(2)  # Small delay between profiles
-        process_html_files("data", "data/chopped/data")
+        process_html_files("data", "data/chopped/data", should_clean=True)
     else:
         print("Failed to login. Please check your credentials and try again.")
     

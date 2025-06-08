@@ -52,7 +52,7 @@ def clean_html(html_content: str) -> str:
     
     return text.strip()
 
-def process_html_files(input_dir: Union[str, Path], output_dir: Union[str, Path]) -> None:
+def process_html_files(input_dir: Union[str, Path], output_dir: Union[str, Path], should_clean: bool = True) -> None:
     """
     Process all HTML files from input directory and save cleaned text versions to output directory.
     
@@ -69,7 +69,8 @@ def process_html_files(input_dir: Union[str, Path], output_dir: Union[str, Path]
     
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
-    clean_root_directory("data/chopped/data")
+    if should_clean:
+        clean_root_directory("data/chopped/data")
     
     # Process all HTML files in the input directory
     for input_path in input_dir.rglob('*.html'):

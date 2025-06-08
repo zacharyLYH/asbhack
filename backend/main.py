@@ -6,6 +6,7 @@ import os
 from llm import process_linkedin_url
 import json
 from dotenv import load_dotenv
+from scheduler import scrape_a_few_profiles
 
 # Load environment variables from .env file
 load_dotenv()
@@ -53,6 +54,7 @@ async def update_urls(request: URLRequest):
         with open(urls_file_path, 'w') as f:
             for url in request.urls:
                 f.write(f"{url.strip()}\n")
+        scrape_a_few_profiles(request.urls)
         
         return URLResponse(
             message="URLs updated successfully",
