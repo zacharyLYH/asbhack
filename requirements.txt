@@ -1,0 +1,19 @@
+Backend scrape
+1. Scrape
+2. Parse -> text
+3. Summarize -> text
+4. Store in database (Pandas DataFrame)
+
+Backend query (GET)
+1. Query database
+2. Data enrichment
+3. Display results
+
+Backend send linkedin urls to frontend (POST)
+1. Save urls to database
+2. Trigger scraping job
+
+Frontend
+1. GET linkedin urls from backend
+
+Dataframe -> asb.csv, url.csv
