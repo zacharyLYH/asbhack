@@ -11,7 +11,7 @@ pip3 install -r backend/requirements.txt
 2.
 
 ```
-touch /backend/.env
+Create a .env in `/backend`
 ```
 
 3. Enter your credentials
@@ -25,12 +25,12 @@ GEMINI_API_KEY=
 4.
 
 ```
-python3 backend/linkedin_scraper.py
+python3 backend/main.py
 ```
 
 5.
 ```
-cd frontend && bun dev
+cd frontend && bun install && bun dev
 cd backend && python3 main.py
 ```
 
