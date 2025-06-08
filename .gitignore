@@ -1,3 +1,4 @@
 backend/venv
+/venv
 .env
 backend/pycache/
